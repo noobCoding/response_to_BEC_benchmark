@@ -1,4 +1,3 @@
-# BiocManager::install(c("edgeR", "limma", "DESeq2", "ctc", "Biobase", "gplots", "ape", "argparse"))
 library(edgeR)
 
 base_names <- list.dirs('data')
