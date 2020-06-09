@@ -1,5 +1,3 @@
-# Code is created by Hai N.C.T. 
-
 # BiocManager::install("apeglm")
 library(DESeq2)
 
