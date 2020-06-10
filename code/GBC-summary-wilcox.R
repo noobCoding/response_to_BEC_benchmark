@@ -1,5 +1,3 @@
-########## summary confusion matrix
-
 rm(list=ls())
 
 # load libraries
