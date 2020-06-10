@@ -88,8 +88,7 @@ sapply(1:dim(combi)[1],function(x){
 
   base_name <- paste0('simul',x,'_dropout_',gsub('\\.','',combi$d[[x]]),'_b1_',combi$b1[[x]],'_b2_',combi$b2[[x]],'/')
   dir.create(base_name, showWarnings = FALSE)
-
-  sim <- simulate(dropout=combi$d[[x]], batchCells = c(combi$b1[[x]],combi$b2[[x]]))
+  sim <- simulate(dropout=combi$d[[x]], batchCells = c(combi$b1[[x]],combi$b2[[x]]))  
   seed = sample(1000, size = 1)
   parameters_text<-file(paste0(base_name,"_parameters.txt"))
   writeLines(c(paste0("dropout = ",combi$d[[x]]),
