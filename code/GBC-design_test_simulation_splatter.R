@@ -4,18 +4,12 @@ library(splatter)
 library(scater)
 library(Seurat)
 
-# this.dir <- "/acrc/jinmiao/CJM_lab/Marion/Project/Hoa_batch_normalization/simulation_dataset_V3/data/"
-# setwd(this.dir)
-
-
-# Get all datasets in dataset3_simulation_v2/ folders
-# Ex: dataset3_simulation_v2/ 
-# Ex: dataset3_simulation_v2/simul1_dropout_005_b1_500_b2_900/    unbalanced number of cells in 2 batches, small dropout
-# Ex: dataset3_simulation_v2/simul2_dropout_025_b1_500_b2_900/    unbalanced number of cells in 2 batches, large dropout
-# Ex: dataset3_simulation_v2/simul3_dropout_005_b1_500_b2_450/    balanced number of cells in 2 batches, small dropout
-# Ex: dataset3_simulation_v2/simul3_dropout_025_b1_500_b2_450/    unbalanced number of cells in 2 batches, large dropout
-# Ex: dataset3_simulation_v2/simul4_dropout_005_b1_80_b2_400/     small number of cells in 2 batches, small dropout
-# Ex: dataset3_simulation_v2/simul4_dropout_025_b1_80_b2_400/     small number of cells in 2 batches, large dropout
+# Ex: simul1_dropout_005_b1_500_b2_900/    unbalanced number of cells in 2 batches, small dropout
+# Ex: simul2_dropout_025_b1_500_b2_900/    unbalanced number of cells in 2 batches, large dropout
+# Ex: simul3_dropout_005_b1_500_b2_450/    balanced number of cells in 2 batches, small dropout
+# Ex: simul4_dropout_025_b1_500_b2_450/    unbalanced number of cells in 2 batches, large dropout
+# Ex: simul5_dropout_005_b1_80_b2_400/     small number of cells in 2 batches, small dropout
+# Ex: simul6_dropout_025_b1_80_b2_400/     small number of cells in 2 batches, large dropout
 
 dropout = rep(c(2.7,2.9),times=3)
 b1 <- rep(c(400,350,350),each = 2)
