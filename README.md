@@ -1,9 +1,9 @@
 # On using batch-effect-corrected data for differential expressionanalysis of single-cell RNA sequencing data
 
-| Mouse Cell Atlas dataset| Human Pancreas dataset   | Sparsity distribution over cells   |
+Mouse Cell Atlas dataset | Human Pancreas dataset   | Sparsity distribution over cells  
 
-|------------|-------------|-------------|
-|<img src="data/mca_dgsp2095_b155_13.png" width="250"> | <img src="data/pan_b13_dgsp2095_b155_13.png" width="250"> | <img src="data/sparsity_distribution_over_cells.png" width="250"> |
+------------|-------------|-------------
+<img src="data/mca_dgsp2095_b155_13.png" width="350"> | <img src="data/pan_b13_dgsp2095_b155_13.png" width="350"> | <img src="data/sparsity_distribution_over_cells.png" width="400"> 
 
 # "data" 
 Including codes for processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**.
