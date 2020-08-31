@@ -1,5 +1,9 @@
 # On using batch-effect-corrected data for differential expressionanalysis of single-cell RNA sequencing data
 
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
 
 ## Mouse Cell Atlas dataset 
 <img src="data/mca_dgsp2095_b155_13.png" width="350">
