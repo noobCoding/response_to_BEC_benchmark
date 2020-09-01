@@ -24,6 +24,7 @@ indrop_human3 <- c(which(pancreas.list$indrop$orig.ident == 'human3'))  # 781 ce
 indrop_beta_human3 <- intersect(indrop_beta, indrop_human3)
 
 K_intervals = c(2, 3, 4, 6, 7, 8)
+
 for (K in K_intervals)
 {
   counts <- pancreas.list$indrop@assays$RNA@counts[, c(indrop_beta_human1, indrop_beta_human3)]
@@ -79,9 +80,7 @@ for (K in K_intervals)
   first_N_genes= DEG_groundthruth[!DEG_groundthruth %in% second_N_genes]
   
   #Down sampling
-  batch1_ori = batch1
-  batch2_ori = batch2
-  
+  ############################# batch 1
   tmp <- batch1[first_N_genes, which(colnames(batch1)==unique(colnames(batch1))[1])]
   for (idx in 1:length(tmp@x)){
     prob = rbeta(1, a, b)
