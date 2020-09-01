@@ -1,5 +1,4 @@
-# BiocManager::install('Seurat')
-library('Seurat') 
+#library('Seurat') 
 
 library('rstudioapi')
 jobRunScript("GBC-run_limma.R")
