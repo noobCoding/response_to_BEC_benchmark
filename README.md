@@ -8,7 +8,7 @@
 <img src="data/sparsity_distribution_over_cells.png" width="450"> 
 
 ### data 
-  * Including codes and results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**
+  * Including code and the results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**
 
 ### results
   * Including code and processed data to quickly re-plot the submitted figures
