@@ -1,7 +1,5 @@
 ########## summary confusion matrix
 rm(list=ls())
-# this.dir <- '/home/marion/Marion/Project/Hoa_batch_normalization/simulation_dataset_V3/'
-# setwd(this.dir)
 
 # load libraries
 library(gridExtra)
