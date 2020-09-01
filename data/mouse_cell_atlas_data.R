@@ -68,6 +68,7 @@ for (K in K_intervals)
   batch1_ori = batch1
   batch2_ori = batch2
   
+  ############################# batch 1
   tmp <- batch1[first_N_genes, which(colnames(batch1)==unique(colnames(batch1))[1])]
   for (g in rownames(tmp)){
     for (c in colnames(tmp)){
