@@ -4,11 +4,11 @@
 | --- | --- |
 | <img src="data/mca_dgsp2095_b155_13.png" width="350"> | <img src="data/pan_b13_dgsp2095_b155_13.png" width="350"> |
 
-### Sparsity distribution over cells  
+### Comparison of sparsity level distribution over cells  
 <img src="data/sparsity_distribution_over_cells.png" width="450"> 
 
 ### data 
-Including codes for processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**.
+Including codes and results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**.
 
 ### code
 This github includes **modified and additional code** for supporting the response to the article at: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1850-9
