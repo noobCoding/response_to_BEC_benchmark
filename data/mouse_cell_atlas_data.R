@@ -65,9 +65,6 @@ for (K in K_intervals)
   first_N_genes= DEG_groundthruth[!DEG_groundthruth %in% second_N_genes]
   
   #Down sampling
-  batch1_ori = batch1
-  batch2_ori = batch2
-  
   ############################# batch 1
   tmp <- batch1[first_N_genes, which(colnames(batch1)==unique(colnames(batch1))[1])]
   for (g in rownames(tmp)){
