@@ -15,7 +15,7 @@ main_Fscore <- function(select){
   # vect_method <- c('raw_data','seurat3','MNN','Combat', 'limma',"limma_voom", #'zinb_wave',
   #                  'scmerge', 'edger', 'deseq2')
   vect_method <- c('raw_data','MNN','Combat', 'limma',"limma_voom",
-                   'edger', 'deseq2', 'seurat3', 'scmerge' # , 'zinb_wave'
+                   'edger', 'deseq2', 'seurat3', 'scmerge' , 'zinb_wave'
                    )
   # vect_method <- c('raw_data')
   
@@ -179,7 +179,7 @@ main_Fscore <- function(select){
       })
       
       mef <- t(df)
-      rownames(mef) <- c('Raw','MNN', 'Combat','limma', 'scmerge','Seurat 3', #'zinb_wave',
+      rownames(mef) <- c('Raw','MNN', 'Combat','limma', 'scmerge','Seurat 3', 'zinb_wave',
                          'limma_voom' , 'edger', 'deseq2')
       # rownames(mef) <- c('Raw')
       
@@ -227,7 +227,7 @@ plotdata$Var2 <- relevel(plotdata$Var2, ref = "limma")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "MNN")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "scmerge")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "seurat3")
-# plotdata$Var2 <- relevel(plotdata$Var2, ref = "zinb_wave")
+plotdata$Var2 <- relevel(plotdata$Var2, ref = "zinb_wave")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "raw_data")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "deseq2")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "edger")
@@ -284,11 +284,11 @@ p4 <- p4 + theme(axis.line = element_line(color = "black", size = 0.5, linetype 
 # p4 <- p4 + scale_x_discrete(breaks=c("raw_data","seurat3","limma"),
 #                             labels=c("Raw","Seurat 3","limma"))
 p4 <- p4 + scale_x_discrete(breaks=c("raw_data","seurat3","MNN","Combat","Combat_seq","limma","limma_voom",
-                                     # "scmerge", 'edger', 'deseq2', "zinb_wave"),
-                                      "scmerge", 'edger', 'deseq2'),
+                                     "scmerge", 'edger', 'deseq2', "zinb_wave"),
+                                      # "scmerge", 'edger', 'deseq2'),
                             labels=c("Raw","Seurat3","MNNCorrect","Combat", "Combat_seq", "limma-bec","limma", 
-                                     # "scMerge", 'edgeR', 'DESeq2', "ZINB-WaVE"))
-                                    "scMerge", 'edgeR', 'DESeq2'))
+                                     "scMerge", 'edgeR', 'DESeq2', "ZINB-WaVE"))
+                                    # "scMerge", 'edgeR', 'DESeq2'))
  
 # #save
 # # ggsave(filename=paste0('Venn_diagram/Fscore_boxplot_flip.png'), plot=p4, width = 18, height = 16)
