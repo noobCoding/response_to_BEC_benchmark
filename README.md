@@ -8,10 +8,10 @@
 <img src="data/sparsity_distribution_over_cells.png" width="450"> 
 
 ### data 
-Including codes and results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**.
+Including codes and results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**
 
 ### results
-Including code and processed data to quickly re-plot the submitted figures.
+Including code and processed data to quickly re-plot the submitted figures
 
 ### code
 This github includes **modified and additional code** for supporting the response to the article at: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1850-9
