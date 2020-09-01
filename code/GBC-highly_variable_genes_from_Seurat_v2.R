@@ -1,5 +1,3 @@
-
-# install.packages('Seurat', lib = '~/R/x86_64-redhat-linux-gnu-library/3.6/Seurat3' )
 # devtools::install_version(package = 'Seurat', version = package_version('2.3.0'))
 library(Seurat, lib.loc = '~/R/x86_64-redhat-linux-gnu-library/3.6/Seurat2')
 # library(Seurat)
