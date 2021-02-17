@@ -1,16 +1,14 @@
 rm(list=ls())
 library('Seurat') 
-source('GBC-Seurat_DEG_analysis.R')
+source('GBC-Seurat_DEG_analysis_auc.R')
 
 ######## S3 batch12 after normalization 
 
 # METHODS
 vect_method <- c('Combat', 'limma', 'MNN', 'seurat3', 'scmerge')
-# vect_method <- c('Combat', 'limma', 'MNN', 'seurat3')
-# vect_method <- c('scmerge')
 
 vect_HVG <- c('all','HVG')
-dir.create('Seurat_DEGs')
+dir.create('Seurat_DEGs_auc')
 
 # SIMULATIONS
 vect_simu <- gsub('data/','',list.dirs('data', recursive=FALSE))
@@ -19,7 +17,7 @@ sapply(vect_simu,function(simu){
   sapply(vect_method,function(method){
     sapply(vect_HVG,function(HVG){
 
-      base_name <- paste0('Seurat_DEGs/',simu,'/')
+      base_name <- paste0('Seurat_DEGs_auc/',simu,'/')
       dir.create(base_name, showWarnings = FALSE)
       base_name <- paste0(base_name,'S3_batch12/')
       dir.create(base_name, showWarnings = FALSE)
@@ -60,8 +58,8 @@ vect_simu <- gsub('data/','',list.dirs('data', recursive=FALSE))
 sapply(vect_simu,function(simu){
   sapply(vect_HVG,function(HVG){
 
-    # dir.create('Seurat_DEGs')
-    base_name <- paste0('Seurat_DEGs/',simu,'/')
+    # dir.create('Seurat_DEGs_auc')
+    base_name <- paste0('Seurat_DEGs_auc/',simu,'/')
     # dir.create(base_name, showWarnings = FALSE)
     base_name <- paste0(base_name,'S3_batch12/')
     # dir.create(base_name, showWarnings = FALSE)

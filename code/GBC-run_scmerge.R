@@ -8,11 +8,11 @@ library(scMerge)
 # 
 
 lsdir <- list.dirs('data', recursive=FALSE) 
+dir.create('demo_scmerge')
 
 sapply(lsdir,function(x){
   
   x2 <- gsub('data/','',x)
-  dir.create('demo_scmerge')
   dir.create(paste0('demo_scmerge/',x2), showWarnings = FALSE)
   
   selection <- c('all', 'HVG')
@@ -22,16 +22,18 @@ sapply(lsdir,function(x){
     
     # read data counts and cellinfo
     if(s=='HVG'){
-      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t')
+      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t', fill = T)
       counts<-t(counts)
       rownames(counts) <- gsub('.', '-', rownames(counts), fixed = TRUE)
     } else {
-      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t')
-      counts_HVG <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t')
-      counts_HVG <- t(counts_HVG)
-      rownames(counts_HVG) <- gsub('.', '-', rownames(counts_HVG), fixed = TRUE)
+      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t', fill=T)
+      hvgenes <- read.table(paste0(x,'/counts_HVG.txt'), head=T, row.names=1, fill = T)
+      hvgenes <- colnames(hvgenes)
+      hvgenes <- gsub('.', '-', hvgenes, fixed = TRUE)
+      idx <- which(!(hvgenes %in% rownames(counts)))
+      hvgenes[idx] <- gsub('X', '', hvgenes[idx], fixed = TRUE)
     }
-    cellinfo <- read.table(paste0(x,'/cellinfo.txt'), head=T, sep='\t')
+    cellinfo <- read.table(paste0(x,'/cellinfo.txt'), head=T, sep='\t', fill=T)
     cellinfo <- subset(cellinfo,select=c('Batch','Group'))
     colnames(cellinfo) <- c('batch','cell_type')
     rownames(cellinfo) <- factor(colnames(counts))
@@ -52,14 +54,17 @@ sapply(lsdir,function(x){
     counts_b2 <- count_df[,colnames(count_df) %in% rownames(cellinfo[cellinfo$batch==unique(cellinfo$batch)[2],])]
     data <- list(counts_b1,counts_b2)
     
-    geneinfo <- read.table(paste0(x,'/geneinfo.txt'), head=T, sep='\t')
-    up_genes <- read.table(paste0(x,'/true_up_genes.txt'), head=T, sep='\t')
-    down_genes <- read.table(paste0(x,'/true_down_genes.txt'), head=T, sep='\t')
-    gi_wobatch <- rbind(up_genes, down_genes)
-    geneinfo_wobatch <- geneinfo$x[gi_wobatch$x]
-    counts2 <- count_df[rownames(count_df) %in% as.character(geneinfo_wobatch),]
-    gene_lowvar <- names(sort(apply(counts2,1,var), decreasing=F)[1:20])
-
+    # geneinfo <- read.table(paste0(x,'/geneinfo.txt'), head=T, sep='\t', fill=T)
+    # up_genes <- read.table(paste0(x,'/true_up_genes.txt'), head=T, sep='\t', fill=T)
+    # down_genes <- read.table(paste0(x,'/true_down_genes.txt'), head=T, sep='\t', fill=T)
+    # gi_wobatch <- rbind(up_genes, down_genes)
+    # geneinfo_wobatch <- geneinfo$x[gi_wobatch$x]
+    # counts2 <- count_df[rownames(count_df) %in% as.character(geneinfo_wobatch),]
+    # gene_lowvar <- names(sort(apply(counts2,1,var), decreasing=F)[1:20])
+    
+    result = scSEGIndex(exprs_mat = counts)
+    gene_lowvar <- rownames(count_df)[which(result$segIdx < .5)]
+        
     if(s=='HVG'){
       # Run ScMerge
       t1 = Sys.time()
@@ -81,7 +86,8 @@ sapply(lsdir,function(x){
         kmeansK = c(2,2),
         assay_name = "scMerge_res",
         replicate_prop = 0.5, verbose=T,
-        marker = rownames(counts_HVG))
+        # marker = rownames(counts))
+        marker = hvgenes)
       t2 = Sys.time()
       print(t2-t1)
     }

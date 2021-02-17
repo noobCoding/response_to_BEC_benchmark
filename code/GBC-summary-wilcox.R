@@ -10,24 +10,17 @@ library(openxlsx)
 dir.create('Venn_diagram')
 
 main_Fscore <- function(select){
-  
   # METHODS
-  # vect_method <- c('raw_data','seurat3','MNN','Combat', 'limma',"limma_voom", #'zinb_wave',
-  #                  'scmerge', 'edger', 'deseq2')
   vect_method <- c('raw_data','MNN','Combat', 'limma',"limma_voom",
-                   'edger', 'deseq2', 'seurat3', 'scmerge' , 'zinb_wave'
+                   'edger', 'deseq2', 'seurat3' , 'scmerge', 'zinbwave'
                    )
-  # vect_method <- c('raw_data')
-  
   # HVG (all/as Seurat)
   vect_HVG <- c('HVG', 'all')
-  # vect_HVG <- c('HVG')
   
   # SIMULATIONS
   vect_simu <- gsub('data/','',list.dirs('data', recursive=FALSE))
   
   Fscore_list <- lapply(vect_HVG,function(HVG){
-    
     base_name <- paste0('Venn_diagram/')
     
     df_all <- lapply(vect_simu,function(simu){
@@ -35,50 +28,41 @@ main_Fscore <- function(select){
       df <- sapply(vect_method,function(method){
         
         if(method=='raw_data'){
-          S3 <- read.table(paste0('Seurat_DEGs/',simu,'/','S3_batch12/',method,'_',HVG,'/degs_batch12__seurat_bimod_DEG.txt'), head=T, sep='\t')
-          S3 <- data.frame(genes = row.names(S3), S3)
-          
+          S3 <- read.table(paste0('Seurat_DEGs/',simu,'/','S3_batch12/',method,'_',HVG,'/degs_batch12__seurat_bimod_DEG.txt'), head=T, sep='\t', fill=T)
+          S3 <- data.frame(genes = rownames(S3), S3)
         } else {
           if (method=='deseq2'){
             if (HVG=='HVG'){
-              S3 <-read.table(paste0('data/',simu,'/','HVG_deseq2_result_table.txt'), head=T, sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','HVG_deseq2_result_table.txt'), head=T, sep='\t', fill=T)
             } else {
-              S3 <-read.table(paste0('data/',simu,'/','all_deseq2_result_table.txt'), head=T,  sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','all_deseq2_result_table.txt'), head=T,  sep='\t', fill=T)
             } 
             S3 <- data.frame(genes = row.names(S3), S3)
           } else if (method=='edger'){
             if (HVG=='HVG'){
-              S3 <-read.table(paste0('data/',simu,'/','HVG_edger_result_table.txt'), head=T, sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','HVG_edger_result_table.txt'), head=T, sep='\t', fill=T)
             } else {
-              S3 <-read.table(paste0('data/',simu,'/','all_edger_result_table.txt'), head=T,  sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','all_edger_result_table.txt'), head=T,  sep='\t', fill=T)
             } 
             S3 <- data.frame(genes = row.names(S3), S3)
           } else if (method=='limma_voom'){
             if (HVG=='HVG'){
-              S3 <-read.table(paste0('data/',simu,'/','HVG_voom_result_table.txt'), head=T, sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','HVG_voom_result_table.txt'), head=T, sep='\t', fill=T)
             } else {
-              S3 <-read.table(paste0('data/',simu,'/','voom_result_table.txt'), head=T,  sep='\t')
+              S3 <-read.table(paste0('data/',simu,'/','voom_result_table.txt'), head=T,  sep='\t', fill=T)
             } 
             S3 <- data.frame(genes = row.names(S3), S3)
           } 
           else {
-            S3 <- read.table(paste0('Seurat_DEGs/',simu,'/','S3_batch12/','after_',method,'_',HVG,'/degs_batch12_seurat_bimod_DEG.txt'), head=T, sep='\t')
+            S3 <- read.table(paste0('Seurat_DEGs/',simu,'/','S3_batch12/','after_',method,'_',HVG,'/degs_batch12_seurat_bimod_DEG.txt'), head=T, sep='\t', fill=T)
           }
         }
-        geneinfo <- read.table(paste0('data/',simu,'/geneinfo.txt'), head=T)
-        real_de_genes_ls <- read.table(paste0('data/',simu,'/de_genes.txt'), head=T)
-        # real_de_genes_ls <- rownames(geneinfo[(geneinfo$DEFacGroup1+geneinfo$DEFacGroup2)!=2,])
-        S7 <- as.data.frame(geneinfo[real_de_genes_ls$x,])
-        # rownames(S7) <- S7[[1]]
+        geneinfo <- read.table(paste0('data/',simu,'/geneinfo.txt'), head=T, fill=T)
+        real_de_genes_ls <- read.table(paste0('data/',simu,'/de_genes.txt'), head=T, fill=T)
+        S7 <- as.data.frame(geneinfo[which(geneinfo$x %in% real_de_genes_ls$x),])
+        rownames(S7) <- S7[[1]]
         colnames(S7) <- c('Gene')
         
-        # if(HVG=='HVG'){
-        #   # read HVG table 
-        #   hvgenes <- read.table(paste0('data/',simu,'/counts_HVG.txt'), head=T, row.names=1)
-        #   hvgenes <- gsub('.', '-', hvgenes, fixed = TRUE)
-        #   # hvgenes <- colnames(hvgenes)
-        #   S7 <- S7[rownames(S7) %in% colnames(hvgenes),]
-        # } 
         cutoff = 0.05
         if(select=='UP'){
           if (method=='deseq2'){
@@ -86,55 +70,55 @@ main_Fscore <- function(select){
             S3 <- S3[S3$adjpvalue<cutoff,]
           }
           else
-          if (method=='edger'){
-            S3 <- S3[S3$logFC<0,]
-            S3 <- S3[S3$adjpvalue<cutoff,]
-          }
+            if (method=='edger'){
+              S3 <- S3[S3$logFC<0,]
+              S3 <- S3[S3$adjpvalue<cutoff,]
+            }
           else
-          if (method=='limma_voom'){
-            S3 <- S3[S3$logFC<0,]
-            S3 <- S3[S3$adjpvalue<cutoff,]
-          } else {
-            S3 <- S3[S3$avg_logFC>0,]
-          }
+            if (method=='limma_voom'){
+              S3 <- S3[S3$logFC<0,]
+              S3 <- S3[S3$adjpvalue<cutoff,]
+            } else {
+              S3 <- S3[S3$avg_logFC>0,]
+            }
           
-          up_genes <- read.table(paste0('data/',simu,'/true_up_genes.txt'), head=T)
-          S7 <- as.data.frame(geneinfo[up_genes$x,])
+          up_genes <- read.table(paste0('data/',simu,'/true_up_genes.txt'), head=T, fill = T)
+          S7 <- as.data.frame(geneinfo[which(geneinfo$x %in% up_genes$x),])
           rownames(S7) <- S7[[1]]
           colnames(S7) <- c('Gene')
           if(HVG=='HVG')
           {
-            hvgenes <- read.table(paste0('data/',simu,'/counts_HVG.txt'), head=T, row.names=1)
+            hvgenes <- read.table(paste0('data/',simu,'/counts_HVG.txt'), head=T, row.names=NULL, fill = T)
             hvgenes <- colnames(hvgenes)
             hvgenes <- gsub('.', '-', hvgenes, fixed = TRUE)
             S7 <- as.data.frame(S7[rownames(S7) %in% hvgenes,])
             colnames(S7) <- c('Gene')
-           } 
+          } 
           
         } else if(select=='DOWN'){
           if (method=='deseq2'){
             S3 <- S3[S3$logFC>0,]
             S3 <- S3[S3$adjpvalue<cutoff,]
           } else
-          if (method=='edger'){
-            S3 <- S3[S3$logFC>0,]
-            S3 <- S3[S3$adjpvalue<cutoff,]
-          } else
-          if (method=='limma_voom'){
-            S3 <- S3[S3$logFC>0,]
-            S3 <- S3[S3$adjpvalue<cutoff,]
-          } 
+            if (method=='edger'){
+              S3 <- S3[S3$logFC>0,]
+              S3 <- S3[S3$adjpvalue<cutoff,]
+            } else
+              if (method=='limma_voom'){
+                S3 <- S3[S3$logFC>0,]
+                S3 <- S3[S3$adjpvalue<cutoff,]
+              } 
           else {
             S3 <- S3[S3$avg_logFC<0,]
           }
           # S7 <- S7[S7$DEFacGroup1<S7$DEFacGroup2,]
-          down_genes <- read.table(paste0('data/',simu,'/true_down_genes.txt'), head=T)
-          S7 <- as.data.frame(geneinfo[down_genes$x,])
+          down_genes <- read.table(paste0('data/',simu,'/true_down_genes.txt'), head=T, fill = T)
+          S7 <- as.data.frame(geneinfo[which(geneinfo$x %in% down_genes$x),])
           rownames(S7) <- S7[[1]]
           colnames(S7) <- c('Gene')
           if(HVG=='HVG'){
             # read HVG table 
-            hvgenes <- read.table(paste0('data/',simu,'/counts_HVG.txt'), head=T, row.names=1)
+            hvgenes <- read.table(paste0('data/',simu,'/counts_HVG.txt'), head=T, row.names=NULL, fill = T)
             hvgenes <- colnames(hvgenes)
             hvgenes <- gsub('.', '-', hvgenes, fixed = TRUE)
             S7 <- as.data.frame(S7[rownames(S7) %in% hvgenes,])
@@ -148,11 +132,11 @@ main_Fscore <- function(select){
         if (method=='deseq2'){
           norm <- S3$genes
         } else
-        if (method=='edger'){
-          norm <- S3$genes
-        } else if (method=='limma_voom'){
-          norm <- S3$genes
-        }
+          if (method=='edger'){
+            norm <- S3$genes
+          } else if (method=='limma_voom'){
+            norm <- S3$genes
+          }
         else {
           norm <- S3$X
         }
@@ -173,18 +157,17 @@ main_Fscore <- function(select){
         Fscore <- round(Fscore,3)
         
         # table matrix confusion 
-        data <- data.frame(TP=TP,FN=FN,FP=FP,recall=TPR,precision=PPV,Fscore=Fscore,row.names = method)
+        data <- data.frame(TP=TP,FN=FN,FP=FP,recall=TPR,precision=PPV,Fscore=Fscore, row.names = method)
         return(data)
-        
       })
       
       mef <- t(df)
-      rownames(mef) <- c('Raw','MNN', 'Combat','limma', 'scmerge','Seurat 3', 'zinb_wave',
+      rownames(mef) <- c('Raw','MNN', 'Combat','limma', 'Seurat 3', 'scmerge', 'zinbwave',
                          'limma_voom' , 'edger', 'deseq2')
-      # rownames(mef) <- c('Raw')
       
       mef <- rbind(rep('',dim(mef)[2]),mef)
       rownames(mef)[rownames(mef)==""] <- simu
+      # print (mef)
       return(list(mef,df['Fscore',]))
       
     })
@@ -193,14 +176,8 @@ main_Fscore <- function(select){
     
     # add Average block
     df_fscore <- do.call(rbind,lapply(df_all,function(l){unlist(l[[2]])}))
-    #df_all_average <- round(t(t(round(colMeans(df_fscore, na.rm = FALSE, dims = 1),7))),3)
     
-    #mef2 <- cbind(matrix('',nrow=dim(df_all_average)[1],ncol=dim(df_all_all)[2]-1),df_all_average)
-    #mef2 <- rbind(rep('',dim(mef2)[2]),mef2)
-    #rownames(mef2)[rownames(mef2)==""] <- "average"
-    #df_all_all_all <- do.call(rbind,list(df_all_all,mef2))
-    
-    write.table(df_all_all,paste0(base_name,'summary_confusion_matrix_',HVG,'_DEGs_',select,'.txt'),sep='\t', quote=F, row.names=T, col.names=NA)
+    write.table(df_all_all,paste0(base_name,'summary_confusion_matrix_',HVG,'_DEGs_',select,'.txt'),sep='\t', quote=F)
     return(df_fscore)
     
   })
@@ -227,7 +204,7 @@ plotdata$Var2 <- relevel(plotdata$Var2, ref = "limma")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "MNN")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "scmerge")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "seurat3")
-plotdata$Var2 <- relevel(plotdata$Var2, ref = "zinb_wave")
+plotdata$Var2 <- relevel(plotdata$Var2, ref = "zinbwave")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "raw_data")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "deseq2")
 plotdata$Var2 <- relevel(plotdata$Var2, ref = "edger")
@@ -284,11 +261,11 @@ p4 <- p4 + theme(axis.line = element_line(color = "black", size = 0.5, linetype 
 # p4 <- p4 + scale_x_discrete(breaks=c("raw_data","seurat3","limma"),
 #                             labels=c("Raw","Seurat 3","limma"))
 p4 <- p4 + scale_x_discrete(breaks=c("raw_data","seurat3","MNN","Combat","Combat_seq","limma","limma_voom",
-                                     "scmerge", 'edger', 'deseq2', "zinb_wave"),
-                                      # "scmerge", 'edger', 'deseq2'),
+                                     "scmerge", 'edger', 'deseq2', "zinbwave"),
+                                     # "scmerge", 'edger', 'deseq2'),
                             labels=c("Raw","Seurat3","MNNCorrect","Combat", "Combat_seq", "limma-bec","limma", 
                                      "scMerge", 'edgeR', 'DESeq2', "ZINB-WaVE"))
-                                    # "scMerge", 'edgeR', 'DESeq2'))
+                                     # "scMerge", 'edgeR', 'DESeq2'))
  
 # #save
 # # ggsave(filename=paste0('Venn_diagram/Fscore_boxplot_flip.png'), plot=p4, width = 18, height = 16)

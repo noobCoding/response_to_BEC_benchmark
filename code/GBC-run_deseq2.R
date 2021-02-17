@@ -1,15 +1,16 @@
 # BiocManager::install("apeglm")
+# BiocManager::install("DESeq2")
 library(DESeq2)
 
-cutoff = 0.05
+#cutoff = 0.05
 
 base_names <- list.dirs('data')
 base_names <-base_names[grepl('dgsp', base_names)]
 
 for(base_name in base_names){
-  counts<- read.table(file = paste0(base_name,"/counts.txt"), sep = "\t")
-  cellinfo<-read.table(file = paste0(base_name,"/cellinfo.txt"), sep = "\t")
-  geneinfo<-read.table(file = paste0(base_name,"/geneinfo.txt"), sep = "\t")
+  counts<- read.table(file = paste0(base_name,"/counts.txt"), sep = "\t", fill=T)
+  cellinfo<-read.table(file = paste0(base_name,"/cellinfo.txt"), sep = "\t", fill=T)
+  geneinfo<-read.table(file = paste0(base_name,"/geneinfo.txt"), sep = "\t", fill=T)
   count_df<-counts
   
   myFilteredData <- count_df
@@ -39,11 +40,11 @@ for(base_name in base_names){
 }
 
 for(base_name in base_names){
-  counts<- read.table(file = paste0(base_name,"/counts_HVG.txt"), sep = "\t")
+  counts<- read.table(file = paste0(base_name,"/counts_HVG.txt"), sep = "\t", fill=T)
   counts<-t(counts)
   rownames(counts) <- gsub('.', '-', rownames(counts), fixed = TRUE)
-  cellinfo<-read.table(file = paste0(base_name,"/cellinfo.txt"), sep = "\t")
-  geneinfo<-read.table(file = paste0(base_name,"/geneinfo.txt"), sep = "\t")
+  cellinfo<-read.table(file = paste0(base_name,"/cellinfo.txt"), sep = "\t", fill=T)
+  geneinfo<-read.table(file = paste0(base_name,"/geneinfo.txt"), sep = "\t", fill=T)
   count_df<-counts
   
   count_df[is.na(count_df)] = 0.

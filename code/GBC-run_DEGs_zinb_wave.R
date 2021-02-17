@@ -4,7 +4,7 @@ source('GBC-Seurat_DEG_analysis.R')
 ######## S3 batch12 after normalization 
 
 # METHODS
-vect_method <- c('zinb_wave')
+vect_method <- c('zinbwave')
 vect_HVG <- c('all','HVG')
 # dir.create('Seurat_DEGs')
 

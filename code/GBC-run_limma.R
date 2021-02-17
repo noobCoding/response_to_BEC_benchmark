@@ -1,15 +1,15 @@
 rm(list=ls())
-
+# BiocManager::install("limma")
 library(limma)
 library(Seurat)
 
 cutoff = 0.05
 
 lsdir <- list.dirs('data', recursive=FALSE) 
+dir.create('demo_limma')
 
 sapply(lsdir,function(x){
   x2 <- gsub('data/','',x)
-  dir.create('demo_limma')
   dir.create(paste0('demo_limma/',x2), showWarnings = T)
   selection <- c('HVG','all')
   
@@ -17,11 +17,11 @@ sapply(lsdir,function(x){
     dir.create(paste0('demo_limma/',x2,'/',s), showWarnings = FALSE)
     # read data counts and cellinfo
     if(s=='HVG'){
-      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t')
+      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t', fill = T)
       counts<-t(counts)
       rownames(counts) <- gsub('.', '-', rownames(counts), fixed = TRUE)
     } else {
-      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t')
+      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t', fill = T)
     }
     cellinfo <- read.table(paste0(x,'/cellinfo.txt'), head=T, sep='\t')
     cellinfo <- subset(cellinfo,select=c('Batch','Group'))

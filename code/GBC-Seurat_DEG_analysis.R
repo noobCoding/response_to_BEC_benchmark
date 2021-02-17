@@ -6,7 +6,7 @@ seurat_analysis_deg <- function(TPM=TPM,
                             base_name="GC_cluster7", 
                             mt="^MT-", 
                             scale=F, 
-                            scale_factor=1e2,
+                            scale_factor=1e4,
                             group1=NULL,
                             group2=NULL,
                             test.use="wilcox",
@@ -42,12 +42,12 @@ seurat_analysis_deg <- function(TPM=TPM,
   #percent.mito <- colSums(pbmc@raw.data[mito.genes, ]) / colSums(pbmc@raw.data)
   #pbmc <- AddMetaData(object = pbmc, metadata = percent.mito, col.name = "percent.mito")
   #
-  #pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = scale_factor)
+  # pbmc <- NormalizeData(object = pbmc, normalization.method = "LogNormalize", scale.factor = scale_factor)
   
   #if(scale){
   #   pbmc <- ScaleData(object = pbmc, vars.to.regress = c("nUMI", "percent.mito"))
   #}else{
-  #   pbmc <- ScaleData(object = pbmc)
+    # pbmc <- ScaleData(object = pbmc)
   #}
   
   if(is.null(group1)&is.null(group2)){
@@ -136,7 +136,7 @@ seurat_analysis_deg2 <- function(TPM=TPM,
                                 base_name="GC_cluster7", 
                                 mt="^MT-", 
                                 scale=F, 
-                                scale_factor=1e2,
+                                scale_factor=1e4,
                                 group1=NULL,
                                 group2=NULL,
                                 test.use="wilcox",

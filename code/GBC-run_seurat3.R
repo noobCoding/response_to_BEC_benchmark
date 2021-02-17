@@ -20,14 +20,15 @@ sapply(lsdir,function(x){
     
     # read data counts and cellinfo
     if(s=='HVG'){
-      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t')
+      counts <- read.table(paste0(x,'/counts_HVG.txt'), head=T, sep='\t', fill = T)
       counts<-t(counts)
       rownames(counts) <- gsub('.', '-', rownames(counts), fixed = TRUE)
     } else {
-      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t')
+      counts <- read.table(paste0(x,'/counts.txt'), head=T, sep='\t', fill = T)
     }
-    cellinfo <- read.table(paste0(x,'/cellinfo.txt'), head=T, sep='\t')
+    cellinfo <- read.table(paste0(x,'/cellinfo.txt'), head=T, sep='\t', fill = T)
     rownames(cellinfo) <- factor(colnames(counts))
+    if (anyNA(counts)) print ("NAs")
     
     pbmc <- CreateSeuratObject(counts = counts, project = '', min.cells = 0, min.features = 0, meta.data = cellinfo)
     pbmc.list <- SplitObject(pbmc, split.by = "Batch")
