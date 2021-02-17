@@ -5,7 +5,7 @@
 
 | **Mouse Cell Atlas dataset** | **Human Pancreas dataset** |
 | --- | --- |
-| <img src="data/mca_dgsp2095_b155_13.png" width="450"> | <img src="data/pan_98_10pp.png" width="450"> |
+| <img src="data/mca_10pp.png" width="450"> | <img src="data/pan_98_10pp.png" width="450"> |
 | --- | --- |
 | <img src="data/mca_10pp_PR_curve_BtLf.png" width="450"> | <img src="data/pan_10pp_98_PR_curve.png" width="450"> |
 
