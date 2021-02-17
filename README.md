@@ -1,11 +1,9 @@
 # On using batch-effect-corrected data for differential expressionanalysis of single-cell RNA sequencing data
 
-### Group vs. Batch data distribution over cells 
-<img src="data/group_vs_batch_distribution.png" width="700"> 
+### Group vs. Batch data distribution - Mouse Cell Atlas
+<img src="data/group_vs_batch_distribution.png" width="900"> 
 
 | **Mouse Cell Atlas dataset** | **Human Pancreas dataset** |
-| --- | --- |
-| <img src="data/mca_10pp_PR_curve_BtLf.png" width="350"> | <img src="data/pan_10pp_98_PR_curve.png" width="350"> |
 | --- | --- |
 | <img src="data/mca_dgsp2095_b155_13.png" width="350"> | <img src="data/pan_b13_dgsp2095_b155_13.png" width="350"> |
 | --- | --- |
