@@ -2,7 +2,9 @@
 
 ### Group vs. Batch data distribution - Mouse Cell Atlas
 <img src="data/group_vs_batch_distribution.png" width="900"> 
+  * We have plotted the distribution of 6 datasets we have simulated from Mouse Cell Atlas dataset. Each subplot clearly shows the large batch difference and the tiny difference between groups. Moreover, plots also show the various ratios of cells in each batch and group that we have implemented on purpose.
 
+### Performance (F-score, Precision-recall curve) of selected methods on specific datasets
 | **Mouse Cell Atlas dataset** | **Human Pancreas dataset** |
 | --- | --- |
 | <img src="data/mca_10pp_pca.png" width="430" height="400"> | <img src="data/pan_98_pca_o.png" width="430" height="400"> |
