@@ -12,7 +12,7 @@
 | <img src="data/mca_10pp_PR_curve_BtLf.png" width="400"> | <img src="data/pan_10pp_98_PR_curve.png" width="400"> | <img src="data/pan_10pp_98_PR_curve.png" width="400"> |
 
 ### Comparison of sparsity level distribution over cells  
-<img src="data/sparsity_distribution_over_cells.png" width="800"> 
+<img src="data/sparsity_distribution_over_cells.png" width="400"> 
 
 ### data 
   * Including code and the results of processing 2 real datasets: **Mouse Cell Atlas** and **Human Pancreas**
