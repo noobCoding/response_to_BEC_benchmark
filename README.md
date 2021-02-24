@@ -7,7 +7,7 @@
 ### Performance (F-score, Precision-recall curve) of selected methods on specific datasets
 | **Mouse Cell Atlas dataset** | **Human Pancreas dataset** | **Splatter simulation dataset** |
 | --- | --- | --- |
-| <img src="data/mca_10pp_pca.png" width="430" height="380"> | <img src="data/pan_98_pca_o.png" width="430" height="380"> | <img src="data/splatter_80_gf.png" width="430" height="380"> |
+| <img src="data/mca_10pp_pca.png" width="430"> | <img src="data/pan_98_pca_o.png" width="430"> | <img src="data/splatter_80_gf.png" width="430"> |
 | <img src="data/mca_10pp.png" width="430"> | <img src="data/pan_98_10pp.png" width="430"> |
 | <img src="data/mca_10pp_PR_curve_BtLf.png" width="450"> | <img src="data/pan_10pp_98_PR_curve.png" width="450"> |
 
