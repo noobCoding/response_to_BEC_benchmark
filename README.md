@@ -5,12 +5,12 @@
  <img src="data/group_vs_batch_distribution.png" width="900"> 
 
 ### Performance (F-score, Precision-recall curve) of selected methods on specific datasets
-| **Mouse Cell Atlas dataset** | **Human Pancreas dataset** | **Splatter simulation dataset** |
+| **Splatter simulation dataset** | **Mouse Cell Atlas dataset** | **Human Pancreas dataset** |
 | --- | --- | --- |
-| <img src="data/mca_10pp_pca.png" width="400"> | <img src="data/pan_98_pca_o.png" width="400"> | <img src="data/splatter_80_gf_pca.png" width="400"> |
-| <img src="data/mca_gene_sparsity.png" width="400"> | <img src="data/pan_gene_sparsity.png" width="400"> | <img src="data/splatter_80_gf_after.png" width="400"> |
-| <img src="data/mca_10pp_fscore.png" width="400"> | <img src="data/pan_98_10pp_fscore.png" width="400"> | <img src="data/splatter_80gf_fscore.png" width="400"> |
-| <img src="data/mca_10pp_PR_curve_9.png" width="400"> | <img src="data/pan_10pp_98_PR_curve_13.png" width="400"> | <img src="data/splatter_80_gf_PR_curve.png" width="400"> |
+| <img src="data/splatter_80_gf_pca.png" width="400"> | <img src="data/mca_10pp_pca.png" width="400"> | <img src="data/pan_98_pca_o.png" width="400"> |
+| <img src="data/splatter_80_gf_after.png" width="400"> | <img src="data/mca_gene_sparsity.png" width="400"> | <img src="data/pan_gene_sparsity.png" width="400"> |
+| <img src="data/splatter_80gf_fscore.png" width="400"> | <img src="data/mca_10pp_fscore.png" width="400"> | <img src="data/pan_98_10pp_fscore.png" width="400"> |
+| <img src="data/splatter_80_gf_PR_curve.png" width="400"> | <img src="data/mca_10pp_PR_curve_9.png" width="400"> | <img src="data/pan_10pp_98_PR_curve_13.png" width="400"> |
 
 ### Comparison of sparsity level distribution over cells  
 <img src="data/sparsity_distribution_over_cells.png" width="600"> 
