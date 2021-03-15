@@ -10,7 +10,7 @@
 | <img src="data/splatter_80_gf_pca.png" width="400"> | <img src="data/mca_10pp_pca.png" width="400"> | <img src="data/pan_98_pca_o.png" width="400"> |
 | <img src="data/splatter_80_gf_after.png" width="400"> | <img src="data/mca_gene_sparsity.png" width="400"> | <img src="data/pan_gene_sparsity.png" width="400"> |
 | <img src="data/splatter_80gf_fscore.png" width="400"> | <img src="data/mca_10pp_fscore.png" width="400"> | <img src="data/pan_98_10pp_fscore.png" width="400"> |
-| <img src="data/splatter_80gf_PR_curve.png" width="400"> | <img src="data/mca_10pp_PR_curve.png" width="400"> | <img src="data/pan_10pp_98_PR_curve.png" width="400"> |
+| <img src="data/splatter_80gf_PR_curve.png" width="400"> | <img src="data/mca_10pp_PR_curve.png" width="400"> | <img src="data/pan_98_10pp_PR_curve.png" width="400"> |
 
 ### Comparison of sparsity level distribution over cells  
 <img src="data/sparsity_distribution_over_cells.png" width="600"> 
