@@ -1,1 +1,1 @@
-This folder includes all analyzed results used in the article.
+## This folder includes the simulated data and the analyzed results that are used in the article.
